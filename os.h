@@ -8,5 +8,4 @@ void* phys_to_virt(uint64_t phys_addr);
 
 void page_table_update(uint64_t pt, uint64_t vpn, uint64_t ppn);
 uint64_t page_table_query(uint64_t pt, uint64_t vpn);
-
-
+void printBits(size_t const size, void const * const ptr);

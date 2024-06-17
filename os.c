@@ -113,15 +113,21 @@ int main(int argc, char **argv)
 	printf("5th Test: PASSED\n");
 
 	/* 6th Test */
-	// page_table_update(pt, 0x1ffff8000000, 0x1212);
-	// assert(page_table_query(pt, 0x1ffff8000000) == 0x1212);
-	// tmp = phys_to_virt(pt << 12);
-	// tmp = phys_to_virt((tmp[511] >> 12) << 12);
-	// tmp = phys_to_virt((tmp[511] >> 12) << 12);
-	// tmp = phys_to_virt((tmp[0] >> 12) << 12);
-	// tmp = phys_to_virt((tmp[0] >> 12) << 12);
-	// tmp[0] = ((tmp[0] >> 1) << 1);
-	// assert(page_table_query(pt, 0x1ffff8000000) == NO_MAPPING);
+	page_table_update(pt, 0x1ffff8000000, 0x1212);
+	assert(page_table_query(pt, 0x1ffff8000000) == 0x1212);
+	tmp = phys_to_virt(pt << 12);
+	printf("found pt\n");
+	tmp = phys_to_virt((tmp[511] >> 12) << 12);
+	printf("found pt[511] found: \n");
+	if(tmp == NULL){
+		printf("is null\n");
+	}
+	tmp = phys_to_virt((tmp[511] >> 12) << 12);
+	tmp = phys_to_virt((tmp[0] >> 12) << 12);
+	tmp = phys_to_virt((tmp[0] >> 12) << 12);
+	tmp[0] = ((tmp[0] >> 1) << 1);
+	printBits(sizeof(uint64_t), &tmp[0]);
+	assert(page_table_query(pt, 0x1ffff8000000) == NO_MAPPING);
 	printf("6th Test: PASSED\n\n----------------\n");
 
 	printf("Overall:  PASSED\n\n");
